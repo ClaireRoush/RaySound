@@ -1,9 +1,8 @@
-module RaySound
+module raySound
 
 go 1.24.3
 
 require (
-	github.com/gen2brain/raylib-go/raygui v0.0.0-20250521210303-fca3bf26c568
 	github.com/gen2brain/raylib-go/raylib v0.0.0-20250521210303-fca3bf26c568
 )
 
