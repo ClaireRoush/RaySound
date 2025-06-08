@@ -1,19 +1,18 @@
 package layout
 
 import (
-	"path/filepath"
-
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
-var navbarHeight = float32(200)
-var resize = false
-var navbarColor = rl.Gray
-var songName = ""
-var droppedFiles []string
-var music = rl.LoadMusicStream("")
+var (
+	navbarHeight = float32(200)
+	resize       = false
+	navbarColor  = rl.Gray
+	songName     = ""
+	droppedFiles []string
+)
 
-func InitBaseLayout(droppedFiles []string) {
+func InitBaseLayout(title string) {
 	mouseY := float32(rl.GetMouseY())
 	resizeZoneHeight := float32(10)
 	rl.DrawRectangle(0, 0, int32(rl.GetScreenWidth()), int32(navbarHeight), rl.White)
@@ -34,10 +33,7 @@ func InitBaseLayout(droppedFiles []string) {
 		}
 	}
 	fontSize := 45
-	var text = "Nothing here :<"
-	if len(droppedFiles) > 0 {
-		text = "Listening rn: " + filepath.Base(droppedFiles[0])
-	}
+	var text = "Playing rn: " + title
 	textWidth := rl.MeasureText(text, int32(fontSize))
 	textX := (int32(rl.GetScreenWidth()) - textWidth) / 2
 	textY := int32((navbarHeight - float32(fontSize)) / 2)
