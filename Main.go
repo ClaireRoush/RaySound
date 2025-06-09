@@ -24,6 +24,7 @@ func main() {
 		rl.ClearBackground(rl.RayWhite)
 		rl.EndDrawing()
 	}
+	rl.UnloadMusicStream(musicManager.GetItem(0).MusicStream)
 	rl.CloseAudioDevice()
 	rl.CloseWindow()
 }
