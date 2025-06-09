@@ -15,12 +15,13 @@ func main() {
 	rl.InitWindow(ScreenWidth, ScreenHeight, "meow")
 	rl.InitAudioDevice()
 	musicManager := music.MusicManager{}
-	musicManager.AddItem("./songs/heat abnormal.mp3")
-	musicManager.PlayMusic()
+
+	musicManager.PlayMusic(1)
+	rl.SetTargetFPS(60)
 	for !rl.WindowShouldClose() {
 		musicManager.UpdateStream()
 		rl.BeginDrawing()
-		initMainWindow.InitBaseLayout(musicManager.GetItem(0).Title)
+		initMainWindow.InitBaseLayout(&musicManager)
 		rl.ClearBackground(rl.RayWhite)
 		rl.EndDrawing()
 	}
