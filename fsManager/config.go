@@ -26,6 +26,6 @@ func InitConfig() ([]string, error) {
 		return nil, err
 	}
 	var config Config
-	json.Unmarshal(data, config)
+	json.Unmarshal(data, &config)
 	return config.Paths, nil
 }
