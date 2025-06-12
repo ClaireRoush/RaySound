@@ -1,8 +1,10 @@
 package main
 
 import (
+	"fmt"
+	"os"
 	music "raySound/music"
-	initMainWindow "raySound/ui"
+	ui "raySound/ui"
 
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
@@ -15,28 +17,18 @@ func main() {
 	rl.InitWindow(ScreenWidth, ScreenHeight, "meow")
 	rl.InitAudioDevice()
 	musicManager := music.MusicManager{}
-	musicManager.AddItem("./songs/heat abnormal.mp3")
-	musicManager.AddItem("./songs/heat abnormal.mp3")
-	musicManager.AddItem("./songs/heat abnormal.mp3")
-	musicManager.AddItem("./songs/heat abnormal.mp3")
-	musicManager.AddItem("./songs/heat abnormal.mp3")
-	musicManager.AddItem("./songs/heat abnormal.mp3")
-	musicManager.AddItem("./songs/heat abnormal.mp3")
-	musicManager.AddItem("./songs/heat abnormal.mp3")
-	musicManager.AddItem("./songs/heat abnormal.mp3")
-	musicManager.AddItem("./songs/heat abnormal.mp3")
-	musicManager.AddItem("./songs/heat abnormal.mp3")
-	musicManager.AddItem("/songs/heat abnormal.mp3")
-	musicManager.AddItem("/songs/heat abnormal.mp3")
-	musicManager.AddItem("/songs/heat abnormal.mp3")
-	musicManager.AddItem("/songs/heat abnormal.mp3")
-	musicManager.AddItem("/songs/heat abnormal.mp3")
-	musicManager.PlayMusic(1)
+	musicManager.AddItem("./songs/edited_heat_abnormal.mp3")
+	img := rl.LoadImageFromMemory(".png", []byte(musicManager.GetItem(musicManager.Index).Cover), int32(len(musicManager.GetItem(musicManager.Index).Cover)))
+
+	os.WriteFile("cover_test.png", []byte(musicManager.GetItem(musicManager.Index).Cover), 0644)
+	fmt.Print([]byte(musicManager.GetItem(musicManager.Index).Cover))
+	texture := rl.LoadTextureFromImage(img)
 	rl.SetTargetFPS(60)
 	for !rl.WindowShouldClose() {
 		musicManager.UpdateStream()
 		rl.BeginDrawing()
-		initMainWindow.InitBaseLayout(&musicManager)
+		rl.DrawTexture(texture, 120, 120, rl.White)
+		ui.InitBaseLayout(&musicManager)
 		rl.ClearBackground(rl.RayWhite)
 		rl.EndDrawing()
 	}

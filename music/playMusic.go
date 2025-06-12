@@ -1,7 +1,9 @@
 package playMusic
 
 import (
+	"fmt"
 	"path/filepath"
+	"raySound/ui/utils"
 
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
@@ -13,6 +15,8 @@ type Music struct {
 	length      float32
 	isPlaying   bool
 	MusicStream rl.Music
+	Cover       string
+	Ext         string
 }
 type MusicManager struct {
 	queue []Music
@@ -20,6 +24,10 @@ type MusicManager struct {
 }
 
 func (m *MusicManager) AddItem(path string) {
+	bytes, ext, err := utils.SaveCoverFromSong(path)
+	if err != nil {
+		fmt.Print(err)
+	}
 	item := Music{
 		Title:       filepath.Base(path),
 		artist:      "meowArtist",
@@ -27,6 +35,8 @@ func (m *MusicManager) AddItem(path string) {
 		length:      3200.0,
 		isPlaying:   false,
 		MusicStream: rl.LoadMusicStream(path),
+		Cover:       string(bytes),
+		Ext:         ext,
 	}
 	m.queue = append(m.queue, item)
 }
