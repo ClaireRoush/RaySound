@@ -31,5 +31,6 @@ func main() {
 		rl.EndDrawing()
 	}
 	rl.CloseAudioDevice()
+	music.UnloadMusicStreams(&musicManager)
 	rl.CloseWindow()
 }

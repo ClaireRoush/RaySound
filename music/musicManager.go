@@ -3,7 +3,6 @@ package playMusic
 import (
 	"fmt"
 	"path/filepath"
-	"raySound/ui/utils"
 
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
@@ -24,7 +23,7 @@ type MusicManager struct {
 }
 
 func (m *MusicManager) AddItem(path string) {
-	bytes, ext, err := utils.SaveCoverFromSong(path)
+	bytes, ext, err := SaveCoverFromSong(path)
 	musicStream := rl.LoadMusicStream(path)
 	if err != nil {
 		fmt.Print(err)

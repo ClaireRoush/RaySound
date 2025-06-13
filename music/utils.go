@@ -1,10 +1,11 @@
-package utils
+package playMusic
 
 import (
 	"fmt"
 	"os"
 
 	"github.com/dhowden/tag"
+	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
 func SaveCoverFromSong(path string) ([]byte, string, error) {
@@ -35,4 +36,10 @@ func SaveCoverFromSong(path string) ([]byte, string, error) {
 	}
 
 	return cover.Data, ext, nil
+}
+
+func UnloadMusicStreams(m *MusicManager) {
+	for index := range len(m.GetItems()) {
+		rl.UnloadMusicStream(m.GetItem(uint32(index)).MusicStream)
+	}
 }
