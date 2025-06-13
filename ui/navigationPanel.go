@@ -1,12 +1,13 @@
 package layout
 
 import (
+	"fmt"
 	music "raySound/music"
 
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
-func renderNavigationPanel(musicManager music.MusicManager) {
+func renderNavigationPanel(musicManager *music.MusicManager) {
 	songs := musicManager.GetItems()
 	padding := 40
 	scrollOffset += rl.GetMouseWheelMove() * 20
@@ -46,6 +47,7 @@ func renderNavigationPanel(musicManager music.MusicManager) {
 
 		if rl.IsMouseButtonPressed(rl.MouseButtonLeft) && rl.CheckCollisionPointRec(rl.GetMousePosition(), songCard) {
 			musicManager.PlayMusic(uint16(i))
+			fmt.Print(i)
 		}
 	}
 }

@@ -30,7 +30,7 @@ func renderHeader(musicManager music.MusicManager) {
 	}
 
 	fontSize := 45
-	currentSong := musicManager.GetItem(musicManager.Index).Title
+	currentSong := musicManager.GetSongRn().Title
 	text := "Playing rn: " + currentSong
 	textWidth := rl.MeasureText(text, int32(fontSize))
 	textX := (int32(rl.GetScreenWidth()) - textWidth) / 2
