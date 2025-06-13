@@ -36,4 +36,5 @@ func renderHeader(musicManager music.MusicManager) {
 	textX := (int32(rl.GetScreenWidth()) - textWidth) / 2
 	textY := int32((navbarHeight - float32(fontSize)) / 2)
 	rl.DrawText(text, textX, textY, int32(fontSize), rl.Gray)
+	rl.DrawTexture(musicManager.GetSongRn().Cover, int32(rl.GetScreenWidth())/2, 50, rl.White)
 }

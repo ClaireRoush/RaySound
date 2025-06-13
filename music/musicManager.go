@@ -14,7 +14,7 @@ type Music struct {
 	length      float32
 	isPlaying   bool
 	MusicStream rl.Music
-	Cover       string
+	Cover       rl.Texture2D
 	Ext         string
 }
 type MusicManager struct {
@@ -24,6 +24,9 @@ type MusicManager struct {
 
 func (m *MusicManager) AddItem(path string) {
 	bytes, ext, err := SaveCoverFromSong(path)
+	image := rl.LoadImageFromMemory(ext, bytes, int32(len(bytes)))
+	rl.ImageResize(image, 150, 150)
+	texture := rl.LoadTextureFromImage(image)
 	musicStream := rl.LoadMusicStream(path)
 	if err != nil {
 		fmt.Print(err)
@@ -35,7 +38,7 @@ func (m *MusicManager) AddItem(path string) {
 		length:      3200.0,
 		isPlaying:   false,
 		MusicStream: musicStream,
-		Cover:       string(bytes),
+		Cover:       texture,
 		Ext:         ext,
 	}
 	m.queue = append(m.queue, item)

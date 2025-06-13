@@ -16,7 +16,7 @@ func main() {
 	musicManager := music.MusicManager{}
 	musicManager.AddItem("./songs/edited_heat_abnormal.mp3")
 	musicManager.AddItem("./songs/edited_heat_abnormal.mp3")
-	musicManager.AddItem("./songs/edited_heat_abnormal.mp3")
+	musicManager.AddItem("./songs/heat_abnormal_with_another_image.mp3")
 	musicManager.AddItem("./songs/edited_heat_abnormal.mp3")
 	musicManager.AddItem("./songs/edited_secret_weapon.flac")
 	musicManager.AddItem("./songs/edited_secret_weapon.flac")
