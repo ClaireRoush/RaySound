@@ -27,6 +27,7 @@ func (m *MusicManager) AddItem(path string) {
 	image := rl.LoadImageFromMemory(ext, bytes, int32(len(bytes)))
 	rl.ImageResize(image, 150, 150)
 	texture := rl.LoadTextureFromImage(image)
+	rl.UnloadImage(image)
 	musicStream := rl.LoadMusicStream(path)
 	if err != nil {
 		fmt.Print(err)

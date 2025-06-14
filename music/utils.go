@@ -41,5 +41,6 @@ func SaveCoverFromSong(path string) ([]byte, string, error) {
 func UnloadMusicStreams(m *MusicManager) {
 	for index := range len(m.GetItems()) {
 		rl.UnloadMusicStream(m.GetItem(uint32(index)).MusicStream)
+		rl.UnloadTexture(m.GetItem(uint32(index)).Cover)
 	}
 }
