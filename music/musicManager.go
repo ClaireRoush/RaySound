@@ -62,10 +62,33 @@ func (m *MusicManager) GetItem(index uint32) *Music {
 
 func (m *MusicManager) PlayMusic(index uint16) {
 	songs := m.GetItems()
+	rl.StopMusicStream(songs[m.Index].MusicStream)
 	rl.PlayMusicStream(songs[index].MusicStream)
 	m.Index = index
 }
 
 func (m *MusicManager) UpdateStream() {
 	rl.UpdateMusicStream(m.GetSongRn().MusicStream)
+}
+
+func (m *MusicManager) NextSong() {
+	items := len(m.GetItems())
+	fmt.Println(items, m.Index)
+	if m.Index+1 >= uint16(len(m.GetItems())) {
+		m.Index = 0
+	} else {
+		m.Index++
+	}
+	m.PlayMusic(m.Index)
+}
+
+func (m *MusicManager) PreviousSong() {
+	items := len(m.GetItems())
+	if m.Index <= 0 {
+		m.Index = uint16(items - 1)
+	} else {
+		m.Index--
+	}
+	fmt.Println(items, m.Index)
+	m.PlayMusic(m.Index)
 }
