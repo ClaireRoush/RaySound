@@ -36,7 +36,7 @@ func (m *MusicManager) AddItem(path string) {
 		artist:      "meowArtist",
 		Path:        path,
 		length:      3200.0,
-		isPlaying:   false,
+		isPlaying:   true,
 		MusicStream: musicStream,
 		Cover:       texture,
 		Ext:         ext,
@@ -73,13 +73,13 @@ func (m *MusicManager) UpdateStream() {
 
 func (m *MusicManager) NextSong() {
 	items := len(m.GetItems())
-	fmt.Println(items, m.Index)
 	if m.Index+1 >= uint16(len(m.GetItems())) {
 		m.Index = 0
 	} else {
 		m.Index++
 	}
 	m.PlayMusic(m.Index)
+	fmt.Println(items, m.Index)
 }
 
 func (m *MusicManager) PreviousSong() {
@@ -91,4 +91,15 @@ func (m *MusicManager) PreviousSong() {
 	}
 	fmt.Println(items, m.Index)
 	m.PlayMusic(m.Index)
+}
+
+func (m *MusicManager) PauseSong() {
+	song := m.GetSongRn()
+	if song.isPlaying {
+		rl.PauseMusicStream(song.MusicStream)
+		song.isPlaying = false
+	} else {
+		rl.ResumeMusicStream(song.MusicStream)
+		song.isPlaying = true
+	}
 }

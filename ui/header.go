@@ -66,4 +66,14 @@ func drawButtons(musicManager *music.MusicManager) {
 	if rl.CheckCollisionPointRec(rl.GetMousePosition(), previousSong) && rl.IsMouseButtonPressed(rl.MouseButtonLeft) {
 		musicManager.PreviousSong()
 	}
+	pauseSong := rl.Rectangle{
+		X:      250,
+		Y:      30,
+		Width:  40,
+		Height: 35,
+	}
+	rl.DrawRectangleRec(pauseSong, rl.Gray)
+	if rl.CheckCollisionPointRec(rl.GetMousePosition(), pauseSong) && rl.IsMouseButtonPressed(rl.MouseButtonLeft) {
+		musicManager.PauseSong()
+	}
 }
