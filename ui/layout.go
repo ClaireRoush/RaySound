@@ -7,7 +7,7 @@ import (
 )
 
 var (
-	navbarHeight = float32(200)
+	navbarHeight = float32(300)
 	resize       = false
 	navbarColor  = rl.Gray
 	songName     = ""

@@ -24,17 +24,20 @@ func renderHeader(musicManager music.MusicManager) {
 	}
 	if resize {
 		newHeight := mouseY
-		if newHeight > 100 && newHeight < 300 {
+		if newHeight > 300 && newHeight < 300 { //idk how to design it, so there is no resize anymore :<
 			navbarHeight = newHeight
 		}
 	}
 
-	fontSize := 45
-	currentSong := musicManager.GetSongRn().Title
-	text := "Playing rn: " + currentSong
+	fontSize := 30
+	text := musicManager.GetSongRn().Title
 	textWidth := rl.MeasureText(text, int32(fontSize))
 	textX := (int32(rl.GetScreenWidth()) - textWidth) / 2
-	textY := int32((navbarHeight - float32(fontSize)) / 2)
+	textY := int32(30 + 150)
 	rl.DrawText(text, textX, textY, int32(fontSize), rl.Gray)
-	rl.DrawTexture(musicManager.GetSongRn().Cover, int32(rl.GetScreenWidth())/2, 50, rl.White)
+	drawImage(musicManager)
+}
+
+func drawImage(musicManager music.MusicManager) {
+	rl.DrawTexture(musicManager.GetSongRn().Cover, int32((rl.GetScreenWidth())/2)-75, 30, rl.White)
 }
