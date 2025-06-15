@@ -21,9 +21,6 @@ func SaveCoverFromSong(path string) ([]byte, string, error) {
 	}
 
 	cover := tags.Picture()
-	if cover == nil {
-		return nil, "", fmt.Errorf("err %s", cover.MIMEType)
-	}
 
 	var ext string
 	switch cover.MIMEType {

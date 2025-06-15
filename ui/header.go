@@ -33,7 +33,7 @@ func renderHeader(musicManager *music.MusicManager) {
 	text := musicManager.GetSongRn().Title
 	textWidth := rl.MeasureText(text, int32(fontSize))
 	textX := (int32(rl.GetScreenWidth()) - textWidth) / 2
-	textY := int32(30 + 150)
+	textY := int32(30 + 155)
 	rl.DrawText(text, textX, textY, int32(fontSize), rl.Gray)
 	drawImage(musicManager)
 	drawButtons(musicManager)
@@ -45,8 +45,8 @@ func drawImage(musicManager *music.MusicManager) {
 
 func drawButtons(musicManager *music.MusicManager) {
 	nextSong := rl.Rectangle{
-		X:      100,
-		Y:      30,
+		X:      (float32(rl.GetScreenWidth())/2 - 20) - 50,
+		Y:      220,
 		Width:  40,
 		Height: 35,
 	}
@@ -56,8 +56,8 @@ func drawButtons(musicManager *music.MusicManager) {
 		musicManager.NextSong()
 	}
 	previousSong := rl.Rectangle{
-		X:      30,
-		Y:      30,
+		X:      (float32(rl.GetScreenWidth())/2 - 20) + 50,
+		Y:      220,
 		Width:  40,
 		Height: 35,
 	}
@@ -67,8 +67,8 @@ func drawButtons(musicManager *music.MusicManager) {
 		musicManager.PreviousSong()
 	}
 	pauseSong := rl.Rectangle{
-		X:      250,
-		Y:      30,
+		X:      (float32(rl.GetScreenWidth())/2 - 20) - 0,
+		Y:      220,
 		Width:  40,
 		Height: 35,
 	}
@@ -76,4 +76,8 @@ func drawButtons(musicManager *music.MusicManager) {
 	if rl.CheckCollisionPointRec(rl.GetMousePosition(), pauseSong) && rl.IsMouseButtonPressed(rl.MouseButtonLeft) {
 		musicManager.PauseSong()
 	}
+}
+
+func drawSlider() {
+
 }

@@ -11,7 +11,8 @@ type Music struct {
 	Title       string
 	artist      string
 	Path        string
-	length      float32
+	Length      float32
+	TimePlayed  float32
 	isPlaying   bool
 	MusicStream rl.Music
 	Cover       rl.Texture2D
@@ -36,7 +37,8 @@ func (m *MusicManager) AddItem(path string) {
 		Title:       filepath.Base(path),
 		artist:      "meowArtist",
 		Path:        path,
-		length:      3200.0,
+		Length:      0,
+		TimePlayed:  0,
 		isPlaying:   true,
 		MusicStream: musicStream,
 		Cover:       texture,
