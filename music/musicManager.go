@@ -72,8 +72,6 @@ func (m *MusicManager) PlayMusic(index uint16) {
 
 func (m *MusicManager) UpdateStream() {
 	rl.UpdateMusicStream(m.GetSongRn().MusicStream)
-	time := rl.GetMusicTimePlayed(m.GetSongRn().MusicStream)
-	fmt.Println(time, rl.GetMusicTimeLength(m.GetSongRn().MusicStream))
 }
 
 func (m *MusicManager) NextSong() {

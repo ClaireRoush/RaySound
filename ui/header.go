@@ -1,5 +1,3 @@
-// actually name is temporaly
-
 package layout
 
 import (
