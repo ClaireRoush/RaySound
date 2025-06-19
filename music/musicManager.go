@@ -57,7 +57,7 @@ func (m *MusicManager) GetItems() []*Music {
 
 func (m *MusicManager) GetItem(index uint32) *Music {
 	items := m.GetItems()
-	if len(items) < int(index) && index < 0 {
+	if len(items) < int(index) && index <= 0 {
 		return &Music{}
 	}
 	return items[index]
@@ -72,6 +72,8 @@ func (m *MusicManager) PlayMusic(index uint16) {
 
 func (m *MusicManager) UpdateStream() {
 	rl.UpdateMusicStream(m.GetSongRn().MusicStream)
+	time := rl.GetMusicTimePlayed(m.GetSongRn().MusicStream)
+	fmt.Println(time, rl.GetMusicTimeLength(m.GetSongRn().MusicStream))
 }
 
 func (m *MusicManager) NextSong() {

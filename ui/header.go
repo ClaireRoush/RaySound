@@ -76,8 +76,31 @@ func drawButtons(musicManager *music.MusicManager) {
 	if rl.CheckCollisionPointRec(rl.GetMousePosition(), pauseSong) && rl.IsMouseButtonPressed(rl.MouseButtonLeft) {
 		musicManager.PauseSong()
 	}
+	drawSlider(*musicManager)
 }
 
-func drawSlider() {
+func drawSlider(m music.MusicManager) {
+	rectX := float32(120)
+	rectMaxX := float32(rl.GetScreenWidth()) - 120
+	tMax := rl.GetMusicTimeLength(m.GetSongRn().MusicStream)
+	tRn := rl.GetMusicTimePlayed(m.GetSongRn().MusicStream)
+	secondsToPosition(rectX, rectMaxX, tRn, tMax)
+	circlePos := secondsToPosition(rectX, rectMaxX, tRn, tMax)
+	rl.DrawRectangle(int32(rectX), int32(navbarHeight)-30, int32(float32(rectMaxX)-rectX), 5, rl.Gray)
+	rl.DrawRectangle(int32(circlePos), int32(navbarHeight-30), 5, 15, rl.Red)
+	if rl.IsMouseButtonPressed(rl.MouseLeftButton) {
+		if float32(rl.GetMouseX()) >= rectX && float32(rl.GetMouseX()) <= float32(rectMaxX) {
+			newTime := positionToSeconds(float32(rl.GetMouseX()), rectX, int32(rectMaxX), tMax)
+			rl.SeekMusicStream(m.GetSongRn().MusicStream, newTime)
+		}
+	}
+}
 
+func positionToSeconds(circlePos, rectX float32, rectMaxX int32, tMax float32) float32 {
+	return (circlePos - rectX) / (float32(rectMaxX) - rectX) * tMax
+}
+
+func secondsToPosition(rectX float32, rectMaxX float32, tRn float32, tMax float32) float32 {
+	circlePos := rectX + (tRn/tMax)*(float32(rectMaxX)-rectX)
+	return circlePos
 }
