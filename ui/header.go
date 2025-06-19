@@ -86,13 +86,24 @@ func drawSlider(m music.MusicManager) {
 	tRn := rl.GetMusicTimePlayed(m.GetSongRn().MusicStream)
 	secondsToPosition(rectX, rectMaxX, tRn, tMax)
 	circlePos := secondsToPosition(rectX, rectMaxX, tRn, tMax)
-	rl.DrawRectangle(int32(rectX), int32(navbarHeight)-30, int32(float32(rectMaxX)-rectX), 5, rl.Gray)
-	rl.DrawRectangle(int32(circlePos), int32(navbarHeight-30), 5, 15, rl.Red)
-	if rl.IsMouseButtonPressed(rl.MouseLeftButton) {
-		if float32(rl.GetMouseX()) >= rectX && float32(rl.GetMouseX()) <= float32(rectMaxX) {
-			newTime := positionToSeconds(float32(rl.GetMouseX()), rectX, int32(rectMaxX), tMax)
-			rl.SeekMusicStream(m.GetSongRn().MusicStream, newTime)
-		}
+	sliderLine := rl.Rectangle{
+		X:      rectX,
+		Y:      navbarHeight - 30,
+		Width:  rectMaxX - rectX,
+		Height: 5,
+	}
+	sliderPointer := rl.Rectangle{
+		X:      circlePos - 5,
+		Y:      navbarHeight - 35,
+		Width:  10,
+		Height: 15,
+	}
+	rl.DrawRectangleRec(sliderLine, rl.Gray)
+	rl.DrawRectangleRec(sliderPointer, rl.Gray)
+	mouse := rl.GetMousePosition()
+	if rl.CheckCollisionPointRec(mouse, sliderLine) && rl.IsMouseButtonPressed(rl.MouseLeftButton) {
+		newTime := positionToSeconds(float32(rl.GetMouseX()), rectX, int32(rectMaxX), tMax)
+		rl.SeekMusicStream(m.GetSongRn().MusicStream, newTime)
 	}
 }
 
