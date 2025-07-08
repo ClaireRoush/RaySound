@@ -13,14 +13,15 @@ type Music struct {
 	Path        string
 	Length      float32
 	TimePlayed  float32
-	isPlaying   bool
+	IsPlaying   bool
 	MusicStream rl.Music
 	Cover       rl.Texture2D
 	Ext         string
 }
 type MusicManager struct {
-	queue []*Music
-	Index uint16
+	queue    []*Music
+	Index    uint16
+	IsPaused bool
 }
 
 func (m *MusicManager) AddItem(path string) {
@@ -39,7 +40,7 @@ func (m *MusicManager) AddItem(path string) {
 		Path:        path,
 		Length:      0,
 		TimePlayed:  0,
-		isPlaying:   true,
+		IsPlaying:   false,
 		MusicStream: musicStream,
 		Cover:       texture,
 		Ext:         ext,
@@ -66,8 +67,10 @@ func (m *MusicManager) GetItem(index uint32) *Music {
 func (m *MusicManager) PlayMusic(index uint16) {
 	songs := m.GetItems()
 	rl.StopMusicStream(songs[m.Index].MusicStream)
+	m.GetSongRn().IsPlaying = false
 	rl.PlayMusicStream(songs[index].MusicStream)
 	m.Index = index
+	m.GetSongRn().IsPlaying = true
 }
 
 func (m *MusicManager) UpdateStream() {
@@ -75,34 +78,30 @@ func (m *MusicManager) UpdateStream() {
 }
 
 func (m *MusicManager) NextSong() {
-	items := len(m.GetItems())
 	if m.Index+1 >= uint16(len(m.GetItems())) {
 		m.Index = 0
 	} else {
 		m.Index++
 	}
 	m.PlayMusic(m.Index)
-	fmt.Println(items, m.Index)
 }
 
 func (m *MusicManager) PreviousSong() {
-	items := len(m.GetItems())
 	if m.Index <= 0 {
-		m.Index = uint16(items - 1)
+		m.Index = uint16(len(m.GetItems()) - 1)
 	} else {
 		m.Index--
 	}
-	fmt.Println(items, m.Index)
 	m.PlayMusic(m.Index)
 }
 
 func (m *MusicManager) PauseSong() {
 	song := m.GetSongRn()
-	if song.isPlaying {
+	if !m.IsPaused {
 		rl.PauseMusicStream(song.MusicStream)
-		song.isPlaying = false
+		m.IsPaused = true
 	} else {
 		rl.ResumeMusicStream(song.MusicStream)
-		song.isPlaying = true
+		m.IsPaused = false
 	}
 }

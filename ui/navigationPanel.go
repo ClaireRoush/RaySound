@@ -41,7 +41,11 @@ func DrawScrollWindow(m *music.MusicManager) {
 			Height: 35,
 		}
 		rl.DrawRectangleRec(songCard, rl.Gray)
-		rl.DrawText(song.Title, 40, y, 30, rl.DarkGray)
+		text := song.Title
+		if song.IsPlaying {
+			text = song.Title + " played rn!!!"
+		}
+		rl.DrawText(text, 40, y, 30, rl.DarkGray)
 		if rl.IsMouseButtonPressed(rl.MouseButtonLeft) && rl.CheckCollisionPointRec(rl.GetMousePosition(), songCard) {
 			m.PlayMusic(uint16(i))
 		}
