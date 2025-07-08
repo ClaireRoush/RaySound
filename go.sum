@@ -2,6 +2,8 @@ github.com/dhowden/tag v0.0.0-20240417053706-3d75831295e8 h1:OtSeLS5y0Uy01jaKK4m
 github.com/dhowden/tag v0.0.0-20240417053706-3d75831295e8/go.mod h1:apkPC/CR3s48O2D7Y++n1XWEpgPNNCjXYga3PPbJe2E=
 github.com/ebitengine/purego v0.8.1 h1:sdRKd6plj7KYW33EH5As6YKfe8m9zbN9JMrOjNVF/BE=
 github.com/ebitengine/purego v0.8.1/go.mod h1:iIjxzd6CiRiOG0UyXP+V1+jWqUXVjPKLAI0mRfJZTmQ=
+github.com/gen2brain/raylib-go/raygui v0.0.0-20250617194346-eddd038123ee h1:OjPt6gJdmxE9p1hVtSCc5WAixk4lG0ExJ70cBoENZd0=
+github.com/gen2brain/raylib-go/raygui v0.0.0-20250617194346-eddd038123ee/go.mod h1:Ji/uPEko2AUkcyPLAelEUa+E8Npc89/XY5Fo/lS/e3I=
 github.com/gen2brain/raylib-go/raylib v0.0.0-20250521210303-fca3bf26c568 h1:k6KR45nXIe6xivCjyu7p2/qfkwfKv1mwTMt0rstXoxA=
 github.com/gen2brain/raylib-go/raylib v0.0.0-20250521210303-fca3bf26c568/go.mod h1:BaY76bZk7nw1/kVOSQObPY1v1iwVE1KHAGMfvI6oK1Q=
 golang.org/x/exp v0.0.0-20241108190413-2d47ceb2692f h1:XdNn9LlyWAhLVp6P/i8QYBW+hlyhrhei9uErw2B5GJo=

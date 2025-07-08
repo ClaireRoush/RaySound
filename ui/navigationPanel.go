@@ -6,12 +6,14 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
-func renderNavigationPanel(musicManager *music.MusicManager) {
-	songs := musicManager.GetItems()
+func DrawScrollWindow(m *music.MusicManager) {
+	songs := m.GetItems()
 	padding := 40
 	scrollOffset += rl.GetMouseWheelMove() * 20
 
-	contentHeight := float32(len(songs) * padding)
+	startY := navbarHeight + 15
+
+	contentHeight := float32(len(songs)*padding) + 25
 	visibleHeight := float32(rl.GetScreenHeight()) - navbarHeight
 	maxScroll := contentHeight - visibleHeight
 
@@ -27,9 +29,7 @@ func renderNavigationPanel(musicManager *music.MusicManager) {
 	}
 
 	for i, song := range songs {
-		startY := navbarHeight + 25
 		y := int32(startY) + int32(i*padding) - int32(scrollOffset)
-
 		if y+35 < int32(navbarHeight) || y > int32(rl.GetScreenHeight()) {
 			continue
 		}
@@ -40,12 +40,11 @@ func renderNavigationPanel(musicManager *music.MusicManager) {
 			Width:  float32(rl.GetScreenWidth()),
 			Height: 35,
 		}
-
 		rl.DrawRectangleRec(songCard, rl.Gray)
-		rl.DrawText(song.Title, int32(rl.GetScreenWidth()/2), y, 30, rl.DarkGray)
-
+		rl.DrawText(song.Title, 40, y, 30, rl.DarkGray)
 		if rl.IsMouseButtonPressed(rl.MouseButtonLeft) && rl.CheckCollisionPointRec(rl.GetMousePosition(), songCard) {
-			musicManager.PlayMusic(uint16(i))
+			m.PlayMusic(uint16(i))
 		}
 	}
+	rl.EndScissorMode()
 }

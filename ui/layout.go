@@ -16,6 +16,6 @@ var (
 )
 
 func InitBaseLayout(musicManager *music.MusicManager) {
+	DrawScrollWindow(musicManager)
 	renderHeader(musicManager)
-	renderNavigationPanel(musicManager)
 }
