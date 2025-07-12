@@ -9,7 +9,7 @@ import (
 
 type Music struct {
 	Title       string
-	artist      string
+	Artist      string
 	Path        string
 	Length      float32
 	TimePlayed  float32
@@ -27,7 +27,7 @@ type MusicManager struct {
 func (m *MusicManager) AddItem(path string) {
 	bytes, ext, err := SaveCoverFromSong(path)
 	image := rl.LoadImageFromMemory(ext, bytes, int32(len(bytes)))
-	rl.ImageResize(image, 150, 150)
+	rl.ImageResize(image, 83, 83)
 	texture := rl.LoadTextureFromImage(image)
 	rl.UnloadImage(image)
 	musicStream := rl.LoadMusicStream(path)
@@ -36,7 +36,7 @@ func (m *MusicManager) AddItem(path string) {
 	}
 	item := &Music{
 		Title:       filepath.Base(path),
-		artist:      "meowArtist",
+		Artist:      "meowArtist",
 		Path:        path,
 		Length:      0,
 		TimePlayed:  0,
