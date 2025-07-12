@@ -2,8 +2,9 @@ package playMusic
 
 import (
 	"fmt"
-	"path/filepath"
+	"os"
 
+	"github.com/dhowden/tag"
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
@@ -31,12 +32,14 @@ func (m *MusicManager) AddItem(path string) {
 	texture := rl.LoadTextureFromImage(image)
 	rl.UnloadImage(image)
 	musicStream := rl.LoadMusicStream(path)
+	osFile, err := os.Open(path)
+	tag, err := tag.ReadFrom(osFile)
 	if err != nil {
 		fmt.Print(err)
 	}
 	item := &Music{
-		Title:       filepath.Base(path),
-		Artist:      "meowArtist",
+		Title:       tag.Title(),
+		Artist:      tag.Artist(),
 		Path:        path,
 		Length:      0,
 		TimePlayed:  0,
